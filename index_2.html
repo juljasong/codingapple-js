@@ -1,0 +1,54 @@
+<!--
+    JS는 CamelCase
+    
+    document.getElementById('close').addEventListener('click', function () {});
+-->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+
+    <div class="alert-box" id="alert-box1">
+        <span class="alert-text">Alert Box</span>
+        <!-- <button onclick="alert('none')">X</button> -->
+        <button id="close">X</button>
+    </div>
+    <button onclick="alert('block')">Button1</button>
+    <button onclick="alert2('아이디를 입력하세요.')">ID</button>
+    <button onclick="alert2('비밀번호를 입력하세요.')">PW</button>
+
+    <script>
+        function alert(parm) {
+            document.getElementById('alert-box1').style.display = parm;
+        }
+
+        function alert2(text) {
+            //document.getElementById('alert-text').innerText = text;
+            document.getElementsByClassName('alert-text')[0].innerText = text;
+            document.getElementById('alert-box1').style.display = 'block';
+        }
+
+        document.getElementById('close').addEventListener('click', function () {
+            document.getElementById('alert-box1').style.display = 'none';
+        });
+
+        /*
+        * Camel Case
+        */
+        function showAlert() {
+            document.getElementById('alert-box1').style.display = 'block';
+        }
+
+        function hideAlert() {
+            document.getElementById('alert-box1').style.display = 'none';
+        }
+    </script>
+</body>
+
+</html>
