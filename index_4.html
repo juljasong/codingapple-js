@@ -1,0 +1,51 @@
+<!--
+    ## 369 게임
+-->
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>369</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+
+    369 : <input type="number" id="game" name="game"><br />
+
+    점수 : <input type="number" id="subject1" name="subject1"><input type="number" id="subject2" name="subject2"><button
+        type="button" id="isOK">합격?</button>
+
+    <script>
+
+        document.getElementById('game').addEventListener('change', () => {
+            var input = document.getElementById('game').value;
+            if (input % 9 == 0) alert('박수x2');
+            else if (input % 3 == 0) alert('박수');
+            else alert('통과');
+        });
+
+        document.getElementById('isOK').addEventListener('click', () => {
+            var subject1 = document.getElementById('subject1').value;
+            var subject2 = document.getElementById('subject2').value;
+
+            if ((subject1 >= 0 && subject1 <= 100) || (subject2 >= 0 && subject2 <= 100)) {
+                alert('점수는 0-100 사이입니다.');
+                return;
+            }
+
+            var temp = Number(subject1) + Number(subject2);
+
+            if (subject1 < 40 || subject2 < 40) alert('과락');
+            else if (temp < 121) alert('총점 : + ' + temp + ' => 불합격');
+            else alert('총점 : + ' + temp + ' => 합격');
+
+        });
+
+    </script>
+</body>
+
+</html>

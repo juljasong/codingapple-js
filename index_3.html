@@ -13,6 +13,14 @@
     document.querySelectorAll('.list-group')[0] // 모든 요소 찾아줌. 인덱스 필요
 
     document.getElementsByClassName('list-group')[0].classList.toggle('show') // clasList에 show가 있으면 없애고, show가 없으면 붙여줌
+
+    truty 자료형 : 0 제외 숫자, '문자', [], {}
+    falsy 자료형 : 0, '', null, undefined, NaN
+
+    ## 변수
+    var : 재선언 가능, 재할당 가능, function-scoped
+    let : 재선언 불가, 재할당 가능, {block-scoped}
+    const : 재선언 불가, 재할당 불가(-> 상수), {block-scoped}
 -->
 
 <!doctype html>
@@ -31,15 +39,24 @@
 
     <div class="black-bg">
         <div class="white-bg">
-            <h4>로그인하세요</h4>
-            <button class="btn btn-danger" id="close">닫기</button>
+            <form action="success.html" onsubmit="return false">
+                <div class="my-3">
+                    <input type="text" class="form-control" id="id" name="id">
+                </div>
+                <div class="my-3">
+                    <input type="password" class="form-control" id="password" name="password">
+                </div>
+                <button type="submit" class="btn btn-primary" id="send">전송</button>
+                <button type="button" class="btn btn-danger" id="close">닫기</button>
+            </form>
         </div>
     </div>
 
 
     <nav class="navbar navbar-light bg-light">
         <div class="container-fluid">
-            <span class="navbar-brand">Navbar</span>
+            <span class="navbar-brand">JSShop</span>
+            <span class="badge bg-dark" id="dark-btn">Dark 🔄</span>
             <button class="navbar-toggler" type="button">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -54,10 +71,11 @@
         <li class="list-group-item">And a fifth one</li>
     </ul>
 
-    <p class="hello">안녕1</p>
-    <p class="hello">안녕2</p>
+    <div class="main-bg">
+        <h4>Shirts On Sale</h4>
+        <button id="modal-btn" class="btn btn-danger">로그인</button>
+    </div>
 
-    <button id="modal-btn">BUTTON</button>
 
 
 
@@ -68,6 +86,44 @@
         integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 
     <script>
+
+        let clickCnt = 0;
+
+        document.querySelector('#dark-btn').addEventListener('click', () => {
+            if (++clickCnt % 2 == 0) {
+                document.querySelector('#dark-btn').innerText = 'Dark 🔄';
+                document.querySelector('body').classList.remove('dark');
+                document.querySelector('.navbar').classList.remove('navbar-dark', 'bg-dark');
+                document.querySelector('.navbar').classList.add('navbar-light', 'bg-light');
+            } else { // 다크모드일 때
+                document.querySelector('#dark-btn').innerText = 'Light 🔄';
+                document.querySelector('body').classList.add('dark');
+                document.querySelector('.navbar').classList.remove('navbar-light', 'bg-light');
+                document.querySelector('.navbar').classList.add('navbar-dark', 'bg-dark');
+            }
+            console.log('clickCnt = ' + clickCnt)
+        });
+
+
+
+        document.querySelector('form').addEventListener('submit', () => {
+            var id = document.getElementById('id').value;
+            var password = document.getElementById('password').value;
+            if (id == '') {
+                alert('아이디를 입력 해 주세요.');
+            }
+            if (password == '') {
+                alert('비밀번호를 입력 해 주세요.');
+            } else {
+                if (password.length < 6) alert('비밀번호는 6글자 이상으로 입력 해 주세요.');
+            }
+        });
+
+        document.getElementById('id').addEventListener('change', () => { // input(값이 바뀔 때 마다) == change(값이 바뀌고 focus가 옮겨지면)
+            console.log(document.getElementById('id').value);
+        });
+
+
         //document.querySelector('.hello').innerHTML = '안녕하세요.';
         $('.hello').html('안녕하세요.');
         $('.hello').css('color', 'blue');

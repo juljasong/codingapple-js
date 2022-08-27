@@ -28,6 +28,11 @@
   padding: 30px;
 }
 
+.main-bg {
+  padding: 100px 20px;
+  background: lightgray;
+}
+
 .show {
   display: block;
 }
@@ -39,4 +44,9 @@
 
 .display-none {
   display: none;
+}
+
+.dark {
+  background-color: black;
+  color: white;
 }
