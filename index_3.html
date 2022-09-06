@@ -76,6 +76,9 @@
         <button id="modal-btn" class="btn btn-danger">로그인</button>
     </div>
 
+    <div class="alert alert-danger">
+        <span id="cnt">5</span>초 이내 구매시 사은품 증정!
+    </div>
 
 
 
@@ -86,8 +89,21 @@
         integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 
     <script>
-
+        let cnt = 5;
         let clickCnt = 0;
+
+        // 3초 후
+        setTimeout(() => {
+            document.getElementsByClassName('alert')[0].style.display = 'none';
+            clearTimeout(interval);
+        }, 5000);
+
+        // 3초 마다
+        const interval = setInterval(() => {
+            document.getElementById('cnt').innerText = --cnt;
+            console.log(cnt);
+        }, 1000);
+
 
         document.querySelector('#dark-btn').addEventListener('click', () => {
             if (++clickCnt % 2 == 0) {
@@ -136,6 +152,7 @@
         document.querySelector('#close').addEventListener('click', () => {
             document.querySelector('.black-bg').classList.remove('show-modal');
         });
+
     </script>
 </body>
 
