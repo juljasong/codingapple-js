@@ -21,6 +21,18 @@
     var : 재선언 가능, 재할당 가능, function-scoped
     let : 재선언 불가, 재할당 가능, {block-scoped}
     const : 재선언 불가, 재할당 불가(-> 상수), {block-scoped}
+
+    ## 특정 시간 후/마다 실행하기 
+    setTimeout(() => {}, 1000);  -- 1초 후 실행
+    setInterval(() => {}, 1000); -- 1초 마다 실행
+    clearTimeout();  -- timeout 속성 지우기
+    clearInterval(); -- interval 속성 지우기
+
+    ## 정규식
+    'text'.includes('e'); -- 특정 문자가 포함되어 있는지
+    /regex/.test('text')  -- 정규식 테스트 
+
+
 -->
 
 <!doctype html>
