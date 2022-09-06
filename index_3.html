@@ -92,6 +92,14 @@
         let cnt = 5;
         let clickCnt = 0;
 
+        // includes
+        console.log('includes: ' + 'abc'.includes('a')); // true
+        //정규식
+        console.log('test: ' + /a/.test('abcd'));
+        console.log('email test: ' + /[\S+@\S+.\S+]/.test('aaa@bbb.ccc'));
+
+
+
         // 3초 후
         setTimeout(() => {
             document.getElementsByClassName('alert')[0].style.display = 'none';
@@ -125,13 +133,15 @@
         document.querySelector('form').addEventListener('submit', () => {
             var id = document.getElementById('id').value;
             var password = document.getElementById('password').value;
-            if (id == '') {
-                alert('아이디를 입력 해 주세요.');
-            }
+
+            if (id == '') alert('아이디를 입력 해 주세요.');
+            if (!/\S+@\S+.\S+/.test(id)) alert('이메일 형식의 아이디를 입력 해 주세요.');
+
             if (password == '') {
                 alert('비밀번호를 입력 해 주세요.');
             } else {
                 if (password.length < 6) alert('비밀번호는 6글자 이상으로 입력 해 주세요.');
+                if (!/[A-Z]/.test(password)) alert('대문자가 적어도 1개 있어야 합니다.');
             }
         });
 
