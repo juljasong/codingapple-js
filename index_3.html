@@ -32,6 +32,10 @@
     'text'.includes('e'); -- 특정 문자가 포함되어 있는지
     /regex/.test('text')  -- 정규식 테스트 
 
+    ## 이동 애니메이션
+    transition: all 1s;
+    vh, vw : 반응형 타겟 요소의 너비값, 높이값 지정 가능
+    translate(값) : 이동
 
 -->
 
@@ -92,6 +96,25 @@
         <span id="cnt">5</span>초 이내 구매시 사은품 증정!
     </div>
 
+    <!--Carousel-->
+    <div style="overflow: hidden;">
+        <div class="slide-container">
+            <div class="slide-box">
+                <img src="/img/car1.png">
+            </div>
+            <div class="slide-box">
+                <img src="/img/car2.png">
+            </div>
+            <div class="slide-box">
+                <img src="/img/car3.png">
+            </div>
+        </div>
+    </div>
+    <button class="slide-lt">&lt;</button>
+    <button class="slide-1">1</button>
+    <button class="slide-2">2</button>
+    <button class="slide-3">3</button>
+    <button class="slide-gt">&gt;</button>
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
@@ -103,6 +126,33 @@
     <script>
         let cnt = 5;
         let clickCnt = 0;
+        let slideNow = 0;
+
+        $('.slide-lt').on('click', () => {
+            slideNow = slideNow - 1 < 0 ? 0 : slideNow - 1;
+            document.querySelector('.slide-container').style.transform = `translateX(-${slideNow}00vw)`;
+        });
+
+        $('.slide-1').on('click', () => {
+            slideNow = 0;
+            document.querySelector('.slide-container').style.transform = `translateX(-${slideNow}00vw)`;
+        });
+
+        $('.slide-2').on('click', () => {
+            slideNow = 1;
+            document.querySelector('.slide-container').style.transform = `translateX(-${slideNow}00vw)`;
+        });
+
+        $('.slide-3').on('click', () => {
+            slideNow = 2;
+            document.querySelector('.slide-container').style.transform = `translateX(-${slideNow}00vw)`;
+        });
+
+        $('.slide-gt').on('click', () => {
+            slideNow = slideNow + 1 > 2 ? 2 : slideNow + 1;
+            document.querySelector('.slide-container').style.transform = `translateX(-${slideNow}00vw)`;
+        });
+
 
         // includes
         console.log('includes: ' + 'abc'.includes('a')); // true
