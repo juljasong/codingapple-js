@@ -37,6 +37,16 @@
     vh, vw : 반응형 타겟 요소의 너비값, 높이값 지정 가능
     translate(값) : 이동
 
+    ## 스크롤
+    window.scrollTo(0, 100); 100px 아래로 스크롤
+    window.scrollBy(0, 100); 현재 위치에서 100px 아래로 스크롤
+    scrollY, scrollX : 스크롤 위치
+    document.querySelector('selector').scrollTop; // 스크롤한 양
+    document.querySelector('selector').scrollHeight; // 실제 높이
+    document.querySelector('selector').clientHeight; // 실제 보이는 높이
+
+    document.querySelector('html') == document.documentElement
+
 -->
 
 <!doctype html>
@@ -92,6 +102,20 @@
         <button id="modal-btn" class="btn btn-danger">로그인</button>
     </div>
 
+    <div class="lorem" style="width: 200px; height: 100px; overflow-y: scroll;">
+        황금시대의 영락과 생의 있는 교향악이다. 것이다.보라, 커다란 천고에 꽃이 힘있다. 뜨거운지라, 아니더면, 위하여, 얼마나 생명을 가지에 오아이스도 사막이다. 군영과 낙원을 같이, 청춘에서만 동력은
+        우리 보라. 사라지지 것은 가지에 눈이 새 눈에 얼음과 끓는다. 주는 그들의 찾아 뜨거운지라, 곳이 위하여 인생에 사는가 것이다. 아니한 찾아 낙원을 같이 살았으며, 원대하고, 새 철환하였는가? 이는
+        무엇을 대고, 밥을 심장은 힘차게 것이다. 인간은 보배를 우리 못하다 만천하의 끓는다.
+        <br />
+        풍부하게 이상의 희망의 피어나는 새 운다. 아름답고 심장의 같이 청춘이 주는 든 품으며, 이 듣는다. 피에 구하기 품에 말이다. 인생을 원대하고, 바로 할지니, 가슴에 긴지라 시들어 끓는다. 뭇 그들은
+        가지에 온갖 있는 돋고, 미묘한 만물은 것이다. 날카로우나 청춘이 청춘을 놀이 철환하였는가? 이것을 꾸며 바로 황금시대의 피가 청춘은 힘차게 우리 말이다. 끓는 있으며, 전인 인간의 얼음에 사라지지
+        봄바람이다. 기쁘며, 사는가 부패를 것이다. 이상은 바이며, 사람은 커다란 싶이 두기 새가 그들은 소금이라 것이다. 그들에게 이 가진 위하여 새 놀이 열락의 우는 있는가?
+        <br />
+        이상, 얼마나 끓는 싹이 이상 실로 풀이 그들을 피가 철환하였는가? 끝에 크고 앞이 트고, 시들어 소담스러운 있는가? 청춘을 불어 그들의 것이다. 대한 피가 그들의 이상이 못할 착목한는 하는 가치를
+        못할 아니다. 청춘의 눈에 가슴에 오직 청춘 내려온 부패뿐이다. 청춘에서만 것이다.보라, 온갖 평화스러운 보이는 것이다. 거선의 위하여, 무엇을 것은 싹이 때에, 아름다우냐? 없으면 것이 새가 밥을
+        두기 무한한 쓸쓸하랴? 뜨고, 피는 스며들어 미인을 이것이다. 든 무한한 피가 장식하는 약동하다. 장식하는 실현에 풀밭에 청춘 듣는다.
+    </div>
+
     <div class="alert alert-danger">
         <span id="cnt">5</span>초 이내 구매시 사은품 증정!
     </div>
@@ -127,6 +151,19 @@
         let cnt = 5;
         let clickCnt = 0;
         let slideNow = 0;
+
+        document.querySelector('.lorem').addEventListener('scroll', () => {
+            let scroll = document.querySelector('.lorem').scrollTop; // 스크롤한 양
+            let height = document.querySelector('.lorem').scrollHeight; // 실제 높이
+            let clientHeight = document.querySelector('.lorem').clientHeight + 20; // 실제 보이는 높이
+
+            if (scroll + clientHeight > height) alert('Perfect!');
+        });
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY >= '100') document.querySelector('.navbar-brand').style.fontSize = '15px';
+            else document.querySelector('.navbar-brand').style.fontSize = '30px';
+        });
 
         $('.slide-lt').on('click', () => {
             slideNow = slideNow - 1 < 0 ? 0 : slideNow - 1;
