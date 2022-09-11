@@ -57,9 +57,9 @@
 
     <div class="container mt-5">
         <ul class="list">
-            <li class="tab-button">Products</li>
-            <li class="tab-button orange">Information</li>
-            <li class="tab-button">Shipping</li>
+            <li class="tab-button" data-id="0">Products</li>
+            <li class="tab-button orange" data-id="1">Information</li>
+            <li class="tab-button" data-id="2">Shipping</li>
         </ul>
         <div class="tab-content">
             <p>상품설명입니다. Product</p>
@@ -84,16 +84,28 @@
         const tabContent = $('.tab-content');
         const tabIndex = document.querySelectorAll('.tab-button').length;
 
+        document.querySelector('.list').addEventListener('click', (e) => {
+            /** DataSet
+             *  data-[name] 으로 html 요소 추가
+             *  => dataset.[name]으로 추가한 값 가져올 수 있음
+             * */
+            openTab(e.target.dataset.id);
+        });
+
+        /*
         for (let i = 0; i < tabIndex; i++) {
             document.querySelectorAll('.tab-button')[i].addEventListener('click', () => {
-                tabButton.removeClass('orange');
-                tabContent.removeClass('show');
-                document.querySelectorAll('.tab-button')[i].classList.add('orange');
-                document.querySelectorAll('.tab-content')[i].classList.add('show');
+                openTab(i);
             });
         }
+        */
 
-
+        function openTab(i) {
+            tabButton.removeClass('orange');
+            tabContent.removeClass('show');
+            document.querySelectorAll('.tab-button')[i].classList.add('orange');
+            document.querySelectorAll('.tab-content')[i].classList.add('show');
+        }
 
     </script>
 </body>
