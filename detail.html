@@ -55,6 +55,12 @@
 
 <body>
 
+    <div calss="container mt-3">
+        <div class="card p-3" style="flex-direction: row;">
+            <span id="productName">상품명</span> / <span id="productPrice">상품명</span>
+        </div>
+    </div>
+
     <div class="container mt-5">
         <ul class="list">
             <li class="tab-button" data-id="0">Products</li>
@@ -79,18 +85,22 @@
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"
         integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <script>
+        const car = ['소나타', 50000, 'white'];
+        const car2 = { name: '벤츠', price: 100000, color: 'black' }; // {key : value}
 
-        const tabButton = $('.tab-button');
-        const tabContent = $('.tab-content');
-        const tabIndex = document.querySelectorAll('.tab-button').length;
+        console.log(car2.name);
+        console.log(car2['name']);
 
-        document.querySelector('.list').addEventListener('click', (e) => {
-            /** DataSet
-             *  data-[name] 으로 html 요소 추가
-             *  => dataset.[name]으로 추가한 값 가져올 수 있음
-             * */
-            openTab(e.target.dataset.id);
-        });
+        //car.slice(2, 1);
+        car.sort(); // 숫자 -> 영어 -> 한글
+        console.log(car);
+
+        const tabButton = $(".tab-button");
+        const tabContent = $(".tab-content");
+        const tabIndex = document.querySelectorAll(".tab-button").length;
+
+        document.querySelector('#productName').innerText = car2.name;
+        document.querySelector('#productPrice').innerText = car2.price;
 
         /*
         for (let i = 0; i < tabIndex; i++) {
@@ -100,12 +110,14 @@
         }
         */
 
-        function openTab(i) {
-            tabButton.removeClass('orange');
-            tabContent.removeClass('show');
-            document.querySelectorAll('.tab-button')[i].classList.add('orange');
-            document.querySelectorAll('.tab-content')[i].classList.add('show');
-        }
+        document.querySelector(".list").addEventListener("click", (e) => {
+            /** DataSet
+             *  data-[name] 으로 html 요소 추가
+             *  => dataset.[name]으로 추가한 값 가져올 수 있음
+             * */
+            openTab(e.target.dataset.id);
+        });
+
 
     </script>
 </body>
