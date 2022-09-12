@@ -86,7 +86,8 @@
         integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <script>
         const car = ['소나타', 50000, 'white'];
-        const car2 = { name: '벤츠', price: 100000, color: 'black' }; // {key : value}
+        //const car2 = { name: '벤츠', price: 100000, color: 'black' }; // {key : value}
+        const car2 = { name: '벤츠', price: [10000, 5000, 7000], color: 'black' }; // {key : value}
 
         console.log(car2.name);
         console.log(car2['name']);
@@ -100,7 +101,7 @@
         const tabIndex = document.querySelectorAll(".tab-button").length;
 
         document.querySelector('#productName').innerText = car2.name;
-        document.querySelector('#productPrice').innerText = car2.price;
+        document.querySelector('#productPrice').innerText = car2.price[1];
 
         /*
         for (let i = 0; i < tabIndex; i++) {
