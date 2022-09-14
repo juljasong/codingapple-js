@@ -43,6 +43,10 @@
 </style>
 <!DOCTYPE html>
 <html>
+/** Arrow Function
+* this 문법 사용 시 문제 생길 수 있음. Arrow Function 의 경우 this 를 외부에서 정의된 this를 그대로 가져옴.
+* this 사용하고 싶으면 function 사용.
+*/
 
 <head>
     <meta charset="utf-8">
@@ -55,11 +59,38 @@
 
 <body>
 
-    <div calss="container mt-3">
+    <div class="container mt-3">
         <div class="card p-3" style="flex-direction: row;">
             <span id="productName">상품명</span> / <span id="productPrice">상품명</span>
         </div>
     </div>
+
+    <form class="container my-5 form-group">
+        <p>상품선택</p>
+        <select class="form-select mt-2">
+            <option>모자</option>
+            <option>셔츠</option>
+            <option>바지</option>
+        </select>
+        <select class="form-select mt-2 form-variable display-none">
+        </select>
+    </form>
+
+    <div id="test" class="container">
+
+
+    </div>
+    <script>
+        const template = `<p>hihi</p>`;
+        document.querySelector('#test').innerHTML = template;
+        // document.querySelector('#test').insertAdjacentHTML('beforeend', template);
+
+        /* 이게 젤 빠름
+        const p = document.createElement('p');
+        p.innerHTML = 'hihi';
+        document.querySelector('#test').appendChild(p);
+        */
+    </script>
 
     <div class="container mt-5">
         <ul class="list">
@@ -85,6 +116,7 @@
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"
         integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <script>
+
         const car = ['소나타', 50000, 'white'];
         //const car2 = { name: '벤츠', price: 100000, color: 'black' }; // {key : value}
         const car2 = { name: '벤츠', price: [10000, 5000, 7000], color: 'black' }; // {key : value}
@@ -102,6 +134,34 @@
 
         document.querySelector('#productName').innerText = car2.name;
         document.querySelector('#productPrice').innerText = car2.price[1];
+
+        const jeanSize = [26, 27, 28, 29];
+        const shirtsSize = [95, 100, 105];
+        const capObj = { model: 'cap', size: 10 };
+
+        document.querySelector('.form-select').addEventListener('change', (e) => {
+            const val = e.currentTarget.value; // eventListener가 달린 곳 => document.querySelector('.form-select')
+            document.querySelector('.form-variable').innerHTML = '';
+            if (val == '셔츠') {
+                document.querySelector('.form-variable').classList.remove('display-none');
+                // for문 (제일 빠름)
+                for (let i = 0; i < shirtsSize.length; i++) {
+                    document.querySelector('.form-variable').innerHTML += '<option>' + shirtsSize[i] + '</option>';
+                }
+            } else if (val == '바지') {
+                document.querySelector('.form-variable').classList.remove('display-none');
+                // forEach
+                jeanSize.forEach((data) => {
+                    document.querySelector('.form-variable').innerHTML += '<option>' + data + '</option>';
+                });
+            } else if (val == '모자') {
+                document.querySelector('.form-variable').classList.add('display-none');
+                // for in => object
+                for (let key in capObj) {
+                    console.log(capObj[key]);
+                }
+            }
+        });
 
         /*
         for (let i = 0; i < tabIndex; i++) {
