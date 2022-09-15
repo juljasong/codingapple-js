@@ -55,7 +55,13 @@
 
 <body>
 
-    <div class="card-group container"></div>
+    <div class="container">
+        <div class="row">
+
+
+
+        </div>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
@@ -64,12 +70,46 @@
         integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <script>
 
-        var products = [
+        const products = [
             { id: 0, price: 70000, title: 'Blossom Dress' },
             { id: 1, price: 50000, title: 'Springfield Shirt' },
             { id: 2, price: 60000, title: 'Black Monastery' }
         ];
 
+        for (let i = 0; i < products.length; i++) {
+            document.querySelector('.container .row').innerHTML +=
+                `<div class="col-sm-4">
+                <img src="https://via.placeholder.com/600" class="w-100">
+                <h5>${products[i].title}</h5>
+                <p>가격 : ${products[i].price}</p>
+            </div>`;
+        }
+
+        /*
+        $.get('https://codingapple1.github.io/price.json')
+            .done((data) => {
+                console.log(data.price);
+            })
+            .fail((data) => {
+                console.log(data.statusText);
+            });
+        */
+
+        /*
+        fetch('https://codingapple1.github.io/price.json')
+            .then(res => res.json())
+            .then(data => {
+                console.log(data.price);
+            })
+            .catch(error => {
+                console.log(error);
+            })
+        */
+
+
+
+
+        /*
         for (let i = 0; i < products.length; i++) {
             document.querySelector('.card-group').innerHTML +=
                 `<div class="card">
@@ -81,6 +121,7 @@
                     </div>
                 </div>`
         }
+        */
 
     </script>
 </body>
