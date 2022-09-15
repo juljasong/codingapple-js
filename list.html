@@ -63,6 +63,10 @@
         </div>
     </div>
 
+    <div class="container">
+        <button class="btn btn-danger">더보기</button>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
         crossorigin="anonymous"></script>
@@ -70,20 +74,44 @@
         integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <script>
 
+        let clickCnt = 0;
+
+        document.querySelector('.btn').addEventListener('click', (e) => {
+
+            if (clickCnt == 1) document.querySelector('.btn').classList.add('display-none');
+
+            fetch(`https://codingapple1.github.io/js/more${++clickCnt}.json`)
+                .then(res => res.json())
+                .then(result => {
+                    result.forEach((data) => {
+                        document.querySelector('.container .row').innerHTML +=
+                            `<div class="col-sm-4">
+                    <img src="https://via.placeholder.com/600" class="w-100">
+                    <h5>${data.title}</h5>
+                    <p>가격 : ${data.price}</p>
+                </div>`;
+                    });
+                })
+                .catch(() => {
+                    console.log('error');
+                });
+        });
+
         const products = [
             { id: 0, price: 70000, title: 'Blossom Dress' },
             { id: 1, price: 50000, title: 'Springfield Shirt' },
             { id: 2, price: 60000, title: 'Black Monastery' }
         ];
 
-        for (let i = 0; i < products.length; i++) {
+        products.forEach((data) => {
             document.querySelector('.container .row').innerHTML +=
                 `<div class="col-sm-4">
-                <img src="https://via.placeholder.com/600" class="w-100">
-                <h5>${products[i].title}</h5>
-                <p>가격 : ${products[i].price}</p>
-            </div>`;
-        }
+                    <img src="https://via.placeholder.com/600" class="w-100">
+                    <h5>${data.title}</h5>
+                    <p>가격 : ${data.price}</p>
+                    
+                </div>`;
+        });
 
         /*
         $.get('https://codingapple1.github.io/price.json')
