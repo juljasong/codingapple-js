@@ -120,7 +120,6 @@
                 sortProducts(products);
             } else if (id == 'sortUnderPrice') { // ~원 이하 정렬
                 let underPrice = document.querySelector('#underPrice');
-                console.log(underPrice.value);
                 filterProducts = products.filter((a) => a.price <= 60000);
                 sortProducts(filterProducts);
             }
@@ -147,14 +146,14 @@
         })); 
 
         
-        function sortProducts(arr) {
+        function sortProducts(productArr) {
             document.querySelector('.container .row').innerHTML = '';
-            arr.forEach((data) => {
+            productArr.forEach((product) => {
                 document.querySelector('.container .row').innerHTML +=
                     `<div class="col-sm-4">
                         <img src="https://via.placeholder.com/600" class="w-100">
-                        <h5>${data.title}</h5>
-                        <p>가격 : ${data.price}</p>
+                        <h5>${product.title}</h5>
+                        <p>가격 : ${product.price}</p>
                         
                     </div>`;
             });
