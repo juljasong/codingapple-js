@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>CART</title>
+</head>
+
+<body>
+
+    <div id="cart-list"></div>
+    <script>
+        let cart = JSON.parse(localStorage.getItem('cart'));
+        if (cart.length != 0) {
+            cart.forEach(product => {
+                document.querySelector('#cart-list').innerHTML += `<p>${product}</p>`;
+            });
+        }
+    </script>
+</body>
+
+</html>

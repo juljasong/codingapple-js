@@ -43,6 +43,15 @@
 </style>
 <!DOCTYPE html>
 <html>
+<!--
+localStorage : 사이트 재접속해도 유지, 문자만 저장할 수 있지만... array/object를 JSON으로 변환하면 저장 가능. (JSON.stringify() -> JSON.parse())
+    - localStorage.setItem() : 저장
+    - localStorage.getItem() : 꺼내기
+    - localStorage.removeItem() : 지우기
+    - 수정할 땐
+        - 꺼내서 수정한 후 다시 넣을 수 밖에.................
+sessionStorage : 사이트 나가면 자동삭제
+-->
 
 <head>
     <meta charset="utf-8">
@@ -56,18 +65,14 @@
 <body>
 
     <div class="container">
-        <div class="row">
-
-
-
-        </div>
+        <div class="row"></div>
     </div>
 
-    <div class="container" id="sortBtn">
+    <div class="container mt-5" id="sortBtn">
         <button class="btn btn-danger" id="more">더보기</button>
         <button class="btn btn-danger" id="sortPrice">가격순정렬</button>
         <button class="btn btn-danger" id="sortProductName">상품명정렬</button>
-        <input type="text" name="underPrice" id="underPrice" value="60000"/> 
+        <input type="text" name="underPrice" id="underPrice" value="60000" />
         <button class="btn btn-danger" id="sortUnderPrice">원 이하 정렬</button>
     </div>
 
@@ -96,12 +101,13 @@
                 fetch(`https://codingapple1.github.io/js/more${++clickCnt}.json`)
                     .then(res => res.json())
                     .then(result => {
-                        result.forEach((data) => {
+                        result.forEach((product) => {
                             document.querySelector('.container .row').innerHTML +=
                                 `<div class="col-sm-4">
                         <img src="https://via.placeholder.com/600" class="w-100">
-                        <h5>${data.title}</h5>
-                        <p>가격 : ${data.price}</p>
+                        <h5>${product.title}</h5>
+                        <p>가격 : ${product.price}</p>
+                        <button class="buy btn btn-primary" onclick="addCart('${product.title}')">구매</button>
                     </div>`;
                         });
                     })
@@ -113,8 +119,8 @@
                 sortProducts(products);
             } else if (id == 'sortProductName') { // 상품명정렬(내림)
                 products.sort((a, b) => {
-                    if(a.title < b.title) return 1;
-                    else if(a.title > b.title) return -1;
+                    if (a.title < b.title) return 1;
+                    else if (a.title > b.title) return -1;
                     else return 0;
                 });
                 sortProducts(products);
@@ -123,9 +129,9 @@
                 filterProducts = products.filter((a) => a.price <= 60000);
                 sortProducts(filterProducts);
             }
-            
+
         });
-    
+
         const arrNo = [7, 3, 5, 40];
         console.log(arrNo.sort()); // [3, 40, 5, 7] : 기본 sort()는 문자 정렬
         console.log(arrNo.sort((a, b) => a - b)); // [3, 5, 7, 40] : 숫자 오름차순
@@ -140,12 +146,12 @@
         const arrAf = ['a', 'c', 'b'];
         console.log(arrAf.sort()); // ['a', 'b', 'c']
         console.log(arrAf.sort((a, b) => { // ['c', 'b', 'a']
-            if(a < b) return 1;
-            if(a > b) return -1;
-            if(a === b) return 0;
-        })); 
+            if (a < b) return 1;
+            if (a > b) return -1;
+            if (a === b) return 0;
+        }));
 
-        
+
         function sortProducts(productArr) {
             document.querySelector('.container .row').innerHTML = '';
             productArr.forEach((product) => {
@@ -154,12 +160,34 @@
                         <img src="https://via.placeholder.com/600" class="w-100">
                         <h5>${product.title}</h5>
                         <p>가격 : ${product.price}</p>
-                        
+                        <button class="buy btn btn-primary" onclick="addCart('${product.title}')">구매</button>
                     </div>`;
             });
         }
-        
+
         sortProducts(products);
+
+        function addCart(product) {
+            let cart = JSON.parse(localStorage.getItem('cart'));
+            //const product = e.target.parentElement.querySelector('h5').innerHTML;
+            if (cart == '' || cart == null) {
+                cart = [product];
+                localStorage.setItem('cart', JSON.stringify(cart));
+            } else {
+                for (let i = 0; i < cart.length; i++) {
+                    if (product == cart[i]) {
+                        alert('이미 추가된 상품입니다.');
+                        return;
+                    }
+                }
+
+                cart.push(product);
+                localStorage.setItem('cart', JSON.stringify(cart));
+            }
+        }
+
+
+
 
         /*
         $.get('https://codingapple1.github.io/price.json')
