@@ -81,16 +81,17 @@ sessionStorage : 사이트 나가면 자동삭제
         crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"
         integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+
+
+
+
     <script>
-
         let clickCnt = 0;
-
         const products = [
             { id: 0, price: 70000, title: 'Blossom Dress' },
             { id: 1, price: 50000, title: 'Springfield Shirt' },
             { id: 2, price: 60000, title: 'Black Monastery' }
         ];
-
         let filterProducts = [];
 
         document.getElementById('sortBtn').addEventListener('click', (e) => {
@@ -129,7 +130,6 @@ sessionStorage : 사이트 나가면 자동삭제
                 filterProducts = products.filter((a) => a.price <= 60000);
                 sortProducts(filterProducts);
             }
-
         });
 
         const arrNo = [7, 3, 5, 40];
@@ -151,7 +151,6 @@ sessionStorage : 사이트 나가면 자동삭제
             if (a === b) return 0;
         }));
 
-
         function sortProducts(productArr) {
             document.querySelector('.container .row').innerHTML = '';
             productArr.forEach((product) => {
@@ -169,21 +168,22 @@ sessionStorage : 사이트 나가면 자동삭제
 
         function addCart(product) {
             let cart = JSON.parse(localStorage.getItem('cart'));
-            //const product = e.target.parentElement.querySelector('h5').innerHTML;
+            let cartArray = new Array();
+            let productJson = new Object();
+
             if (cart == '' || cart == null) {
-                cart = [product];
-                localStorage.setItem('cart', JSON.stringify(cart));
+                productJson.title = product;
+                productJson.count = 0;
             } else {
                 for (let i = 0; i < cart.length; i++) {
-                    if (product == cart[i]) {
-                        alert('이미 추가된 상품입니다.');
-                        return;
+                    if (product == cart[i].title) {
+
                     }
                 }
 
-                cart.push(product);
-                localStorage.setItem('cart', JSON.stringify(cart));
             }
+            cartArray.push(productJson);
+            localStorage.setItem('cart', JSON.stringify(cartArray));
         }
 
 
